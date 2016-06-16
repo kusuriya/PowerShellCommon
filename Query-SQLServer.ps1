@@ -64,24 +64,24 @@ function Query-SQLServer
     # If the user did not supply a full connection string to us we will need to build one.
 	if (!$ConnectionString)
 	{
-        # If we were given a credential we should use it.
-        if ($Credential) {
-            $Builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder
-            $Builder.'Data Source' = $Server
-            $Builder.'Integrated Security' = $false
-            $Builder.'Username' = $Credential.GetNetworkCredential().Username
-            $Builder.'Password' = $Credential.GetNetworkCredential().Password
-            $Builder.'Initial Catalog' = $Database
-            $ConnectionString = $Builder.ConnectionString
-        }
-        # Otherwise just use integrated auth
-        else {
-            $Builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder
-            $Builder.'Data Source' = $Server
-            $Builder.'Integrated Security' = $true
-            $Builder.'Initial Catalog' = $Database
-            $ConnectionString = $Builder.ConnectionString
-        }
+        	# If we were given a credential we should use it.
+	        if ($Credential) {
+	            $Builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder
+	            $Builder.'Data Source' = $Server
+	            $Builder.'Integrated Security' = $false
+	            $Builder.'Username' = $Credential.GetNetworkCredential().Username
+	            $Builder.'Password' = $Credential.GetNetworkCredential().Password
+	            $Builder.'Initial Catalog' = $Database
+	            $ConnectionString = $Builder.ConnectionString
+	        }
+        	# Otherwise just use integrated auth
+	        else {
+	            $Builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder
+	            $Builder.'Data Source' = $Server
+	            $Builder.'Integrated Security' = $true
+	            $Builder.'Initial Catalog' = $Database
+	            $ConnectionString = $Builder.ConnectionString
+	        }
 	}
 	
 	$Connection = new-object system.data.SqlClient.SQLConnection($ConnectionString)
