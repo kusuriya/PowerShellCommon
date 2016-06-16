@@ -19,7 +19,7 @@ function Query-SQLServer
         		ConnectionString
         			Allows you to specify a raw MSSQL connection string.
         
-        .PARAMETER
+                .PARAMETER
         		Credential
         			Takes a PSCredential object and allows you to pull it into the connection string builder.
         			
