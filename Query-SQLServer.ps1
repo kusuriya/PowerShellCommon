@@ -1,44 +1,37 @@
 function Query-SQLServer {
         	<#
         	.DESCRIPTION
-        		This will open connections and issue queries against an MSSQL server.
+                        This will open connections and issue queries against an MSSQL server.
         		
-        	.PARAMETER
-        		Query
-        			The Parameter is the query that will be passed to the SQL server.
+        	.PARAMETER Query
+                        The Parameter is the query that will be passed to the SQL server.
         			
-        	.PARAMETER
-        		Database
-        			Specifies the database to connect to.
+        	.PARAMETER Database
+                        Specifies the database to connect to.
         			
-        	.PARAMETER
-        		Server
-        			Specifies the server to connect to.
+        	.PARAMETER Server
+                        Specifies the server to connect to.
         			
-        	.PARAMETER
-        		ConnectionString
-        			Allows you to specify a raw MSSQL connection string.
+        	.PARAMETER ConnectionString
+                        Allows you to specify a raw MSSQL connection string.
         
-                .PARAMETER
-        		Credential
-        			Takes a PSCredential object and allows you to pull it into the connection string builder.
+                .PARAMETER Credential
+                        Takes a PSCredential object and allows you to pull it into the connection string builder.
         			
-        	.PARAMETER
-        		Parameters
-        			Takes a hashtable input and creates parameters to be consumed by the SQL query.
+        	.PARAMETER Parameters
+                        Takes a hashtable input and creates parameters to be consumed by the SQL query.
         			
-        	.PARAMETER
-        		Timeout
-        			Let the SQL server know how long you are willing to wait for the query to return something before timeing out.
+        	.PARAMETER Timeout
+                        Let the SQL server know how long you are willing to wait for the query to return something before timeing out.
         
         	.EXAMPLE
-        		 Query-SQLServer -Server SQL1 -Database AutoMation -Query $("DECLARE @SQL nvarchar(max); set @SQL = 'Select * from ' + @table; exec(@SQL)") -Parameters @{'table' = $Table}
+                        Query-SQLServer -Server SQL1 -Database AutoMation -Query $("DECLARE @SQL nvarchar(max); set @SQL = 'Select * from ' + @table; exec(@SQL)") -Parameters @{'table' = $Table}
         	
         	.EXAMPLE
-        		 Query-SQLServer -ConnectionString "Data Source=SQLServer.lan.contoso.com; Integrated Security=SSPI;Database=Automation;Username=Root;password=tor" -Query $("DECLARE @SQL nvarchar(max); set @SQL = 'Select * from ' + @table; exec(@SQL)") -Parameters @{'table' = $Table}
+                        Query-SQLServer -ConnectionString "Data Source=SQLServer.lan.contoso.com; Integrated Security=SSPI;Database=Automation;Username=Root;password=tor" -Query $("DECLARE @SQL nvarchar(max); set @SQL = 'Select * from ' + @table; exec(@SQL)") -Parameters @{'table' = $Table}
         			
         	.NOTES
-        		Author: Jason Barbier <jabarb@corrupted.io>
+                        Author: Jason Barbier <jabarb@corrupted.io>
         #>
         [cmdletbinding()]
         param (
