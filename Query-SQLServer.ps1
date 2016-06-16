@@ -62,7 +62,7 @@ function Query-SQLServer {
         if (!$ConnectionString) {
         	# If we were given a credential we should use it.
                 if ($Credential) {
-                    $Builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder
+                    $Builder = New-Object System.Data.SQLClient.SqlConnectionStringBuilder
                     $Builder.'Data Source' = $Server
                     $Builder.'Integrated Security' = $false
                     $Builder.'Username' = $Credential.GetNetworkCredential().Username
@@ -72,7 +72,7 @@ function Query-SQLServer {
                 } # end if (!$ConnectionString)
         	# Otherwise just use integrated auth
                 else {
-                    $Builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder
+                    $Builder = New-Object System.Data.SQLClient.SQLConnectionStringBuilder
                     $Builder.'Data Source' = $Server
                     $Builder.'Integrated Security' = $true
                     $Builder.'Initial Catalog' = $Database
@@ -80,8 +80,8 @@ function Query-SQLServer {
                 } # end else
         }
         
-        $Connection = new-object system.data.SqlClient.SQLConnection($ConnectionString)
-        $Command = new-object system.data.sqlclient.sqlcommand($Query,$connection)
+        $Connection = New-Object System.Data.SQLClient.SQLConnection($ConnectionString)
+        $Command = New-Object System.Data.SQLClient.SqlCommand($Query,$connection)
         
         # Setup config stuff
         $Command.CommandTimeout=$Timeout
@@ -92,7 +92,7 @@ function Query-SQLServer {
         
         $Connection.Open()
         
-        $Adapter = New-Object System.Data.sqlclient.sqlDataAdapter($Command)
+        $Adapter = New-Object System.Data.SQLClient.SqlDataAdapter($Command)
         $Dataset = New-Object System.Data.DataSet
         [Void]$Adapter.Fill($dataSet)
         return $Dataset.Tables
