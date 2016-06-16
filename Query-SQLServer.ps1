@@ -1,8 +1,8 @@
-function Query-SQLServer
-{
+function Query-SQLServer {
         	<#
         	.DESCRIPTION
         		This will open connections and issue queries against an MSSQL server.
+        		
         	.PARAMETER
         		Query
         			The Parameter is the query that will be passed to the SQL server.
@@ -41,8 +41,7 @@ function Query-SQLServer
         		Author: Jason Barbier <jabarb@corrupted.io>
         #>
         [cmdletbinding()]
-        param
-        (
+        param (
                 [parameter(position=1,Mandatory=$true, HelpMessage="This function requires a query!")]
                 [string]$Query = $null,
                 [parameter(Position=2, HelpMessage="This takes an MSSQL Connection String")]
@@ -57,12 +56,10 @@ function Query-SQLServer
                 [hashtable]$Parameters=@{},
                 [parameter(Position=7, HelpMessage="How long should we wait?")]
         	[int]$Timeout = 30
-        	
         )
         
         # If the user did not supply a full connection string to us we will need to build one.
-        if (!$ConnectionString)
-        {
+        if (!$ConnectionString) {
         	# If we were given a credential we should use it.
                 if ($Credential) {
                     $Builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder
@@ -72,7 +69,7 @@ function Query-SQLServer
                     $Builder.'Password' = $Credential.GetNetworkCredential().Password
                     $Builder.'Initial Catalog' = $Database
                     $ConnectionString = $Builder.ConnectionString
-                }
+                } # end if (!$ConnectionString)
         	# Otherwise just use integrated auth
                 else {
                     $Builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder
@@ -80,7 +77,7 @@ function Query-SQLServer
                     $Builder.'Integrated Security' = $true
                     $Builder.'Initial Catalog' = $Database
                     $ConnectionString = $Builder.ConnectionString
-                }
+                } # end else
         }
         
         $Connection = new-object system.data.SqlClient.SQLConnection($ConnectionString)
@@ -89,10 +86,9 @@ function Query-SQLServer
         # Setup config stuff
         $Command.CommandTimeout=$Timeout
         
-        foreach ($Parameter in $Parameters.Keys)
-        {
+        foreach ($Parameter in $Parameters.Keys) {
         	[Void]$Command.Parameters.AddWithValue("@$Parameter",$Parameters[$Parameter])
-        }
+        } # end foreach ($Parameter in $Parameters.Keys)
         
         $Connection.Open()
         
