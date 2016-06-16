@@ -45,18 +45,18 @@ function Query-SQLServer
 	param
 	(
 		[parameter(position=1,Mandatory=$true, HelpMessage="This function requires a query!")]
-    [string]$Query = $null,
-    [parameter(Position=2, HelpMessage="This takes an MSSQL Connection String")]
+    		[string]$Query = $null,
+    		[parameter(Position=2, HelpMessage="This takes an MSSQL Connection String")]
 		[string]$ConnectionString = $null,
-    [parameter(Position=3, HelpMessage="Please specify user credentials in a PSCredential object")]
-    [PSCredential]$Credential,
-    [parameter(Position=4, HelpMessage="What is the default database you are going to connect to?")]
+    		[parameter(Position=3, HelpMessage="Please specify user credentials in a PSCredential object")]
+    		[PSCredential]$Credential,
+    		[parameter(Position=4, HelpMessage="What is the default database you are going to connect to?")]
 		[string]$Database = $null,
-    [parameter(Position=5, HelpMessage="What server is the database on")]
+    		[parameter(Position=5, HelpMessage="What server is the database on")]
 		[string]$Server = $null,
-    [parameter(Position=6, HelpMessage="This takes a hashtable to pass parameters to a parmeterized query")]
+    		[parameter(Position=6, HelpMessage="This takes a hashtable to pass parameters to a parmeterized query")]
 		[hashtable]$Parameters=@{},
-    [parameter(Position=7, HelpMessage="How long should we wait?")]
+    		[parameter(Position=7, HelpMessage="How long should we wait?")]
 		[int]$Timeout = 30
 		
 	)
